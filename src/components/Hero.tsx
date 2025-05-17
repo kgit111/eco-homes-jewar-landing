@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { gsap } from "gsap";
@@ -89,7 +89,7 @@ const Hero = () => {
         ref={bgImageRef}
         className="absolute inset-0 bg-cover bg-center scale-110"
         style={{
-          backgroundImage: 'url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2000")',
+          backgroundImage: 'url("https://images.unsplash.com/photo-1469041797191-50ace28483c3?q=80&w=2000")',
         }}
       >
         {/* Overlay */}
@@ -102,7 +102,7 @@ const Hero = () => {
           <span className="text-eco-light">Live Green</span>, Stay Connected
         </h1>
         <p className="text-xl md:text-2xl text-white text-shadow mb-8 max-w-3xl mx-auto">
-          Premium Plots Near Jewar Airport, designed for modern sustainable living
+          Premium Plots Near Jewar Airport and Yamuna Expressway, designed for modern sustainable living
         </p>
         
         <div className="buttons-container flex flex-col md:flex-row justify-center items-center gap-4">
