@@ -1,17 +1,99 @@
 
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const AboutUs = () => {
+  const sectionRef = useRef(null);
+  const headingRef = useRef(null);
+  const contentRef = useRef(null);
+  const imageContainerRef = useRef(null);
+  const featuresRef = useRef(null);
+  
+  useEffect(() => {
+    // Heading animation
+    gsap.fromTo(
+      headingRef.current,
+      { y: 50, opacity: 0 },
+      { 
+        y: 0, 
+        opacity: 1, 
+        duration: 0.8,
+        scrollTrigger: {
+          trigger: headingRef.current,
+          start: "top 80%",
+          toggleActions: "play none none none"
+        }
+      }
+    );
+    
+    // Content animation
+    gsap.fromTo(
+      contentRef.current,
+      { x: -50, opacity: 0 },
+      { 
+        x: 0, 
+        opacity: 1, 
+        duration: 0.8,
+        delay: 0.2,
+        scrollTrigger: {
+          trigger: contentRef.current,
+          start: "top 75%",
+          toggleActions: "play none none none"
+        }
+      }
+    );
+    
+    // Image container animation
+    gsap.fromTo(
+      imageContainerRef.current,
+      { x: 50, opacity: 0 },
+      { 
+        x: 0, 
+        opacity: 1, 
+        duration: 0.8,
+        delay: 0.4,
+        scrollTrigger: {
+          trigger: imageContainerRef.current,
+          start: "top 75%",
+          toggleActions: "play none none none"
+        }
+      }
+    );
+    
+    // Features animation
+    const features = featuresRef.current.children;
+    gsap.fromTo(
+      features,
+      { y: 50, opacity: 0 },
+      { 
+        y: 0, 
+        opacity: 1, 
+        duration: 0.6,
+        stagger: 0.2,
+        scrollTrigger: {
+          trigger: featuresRef.current,
+          start: "top 75%",
+          toggleActions: "play none none none"
+        }
+      }
+    );
+    
+  }, []);
+
   return (
-    <section id="about" className="section-padding bg-eco-lightest">
+    <section id="about" ref={sectionRef} className="section-padding bg-eco-lightest">
       <div className="container mx-auto px-4">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">About Yamuna Eco Homes</h2>
-          <div className="w-24 h-1 bg-eco mx-auto mb-12"></div>
+          <div ref={headingRef}>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">About Yamuna Eco Homes</h2>
+            <div className="w-24 h-1 bg-eco mx-auto mb-12"></div>
+          </div>
 
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
+            <div ref={contentRef}>
               <h3 className="text-2xl font-semibold mb-4 text-eco-dark">Our Vision</h3>
               <p className="mb-6 text-gray-700">
                 Yamuna Eco Homes represents a harmonious blend of modern living and ecological responsibility. 
@@ -26,7 +108,7 @@ const AboutUs = () => {
               </p>
             </div>
 
-            <div className="relative">
+            <div ref={imageContainerRef} className="relative">
               <img 
                 src="https://images.unsplash.com/photo-1518495973542-4542c06a5843?q=80&w=800" 
                 alt="Lush greenery at Yamuna Eco Homes" 
@@ -39,7 +121,7 @@ const AboutUs = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-20">
+          <div ref={featuresRef} className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-20">
             <div className="bg-white p-8 rounded-lg shadow-md transition-transform hover:translate-y-[-10px]">
               <div className="w-16 h-16 bg-eco rounded-full flex items-center justify-center mb-6">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">

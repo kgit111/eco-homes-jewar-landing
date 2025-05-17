@@ -1,6 +1,8 @@
 
 import { useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
+import { gsap } from "gsap";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import AboutUs from "@/components/AboutUs";
@@ -11,6 +13,10 @@ import Testimonials from "@/components/Testimonials";
 import Faqs from "@/components/Faqs";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
+import AnimatedSection from "@/components/AnimatedSection";
+
+// Register GSAP plugins
+gsap.registerPlugin(ScrollToPlugin);
 
 const Index = () => {
   useEffect(() => {
@@ -22,6 +28,36 @@ const Index = () => {
     if (metaDesc) {
       metaDesc.setAttribute("content", "Yamuna Eco Homes offers premium plots near Jewar Airport and Yamuna Expressway. Experience sustainable living with excellent connectivity and investment potential.");
     }
+    
+    // Smooth scroll implementation
+    const handleAnchorClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const anchor = target.closest('a');
+      
+      if (anchor && anchor.getAttribute('href')?.startsWith('#')) {
+        e.preventDefault();
+        const targetId = anchor.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+          gsap.to(window, {
+            duration: 1,
+            scrollTo: {
+              y: targetElement,
+              offsetY: 80
+            },
+            ease: "power3.inOut"
+          });
+        }
+      }
+    };
+    
+    // Add event listener for smooth scrolling
+    document.addEventListener('click', handleAnchorClick);
+    
+    return () => {
+      document.removeEventListener('click', handleAnchorClick);
+    };
   }, []);
 
   return (
@@ -31,12 +67,24 @@ const Index = () => {
       <main>
         <Hero />
         <AboutUs />
-        <ProjectDetails />
-        <LocationMap />
-        <Gallery />
-        <Testimonials />
-        <Faqs />
-        <ContactForm />
+        <AnimatedSection>
+          <ProjectDetails />
+        </AnimatedSection>
+        <AnimatedSection fromY={0} fromX={-50}>
+          <LocationMap />
+        </AnimatedSection>
+        <AnimatedSection>
+          <Gallery />
+        </AnimatedSection>
+        <AnimatedSection fromY={0} fromX={50}>
+          <Testimonials />
+        </AnimatedSection>
+        <AnimatedSection>
+          <Faqs />
+        </AnimatedSection>
+        <AnimatedSection>
+          <ContactForm />
+        </AnimatedSection>
       </main>
       <Footer />
     </div>

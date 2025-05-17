@@ -1,22 +1,76 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+// Register ScrollTrigger plugin
+gsap.registerPlugin(ScrollTrigger);
 
 const Hero = () => {
   const [offset, setOffset] = useState(0);
+  const heroRef = useRef(null);
+  const heroContentRef = useRef(null);
+  const statsRef = useRef(null);
+  const scrollIndicatorRef = useRef(null);
   
   useEffect(() => {
     const handleScroll = () => {
       setOffset(window.pageYOffset * 0.5);
     };
     window.addEventListener('scroll', handleScroll);
+    
+    // GSAP animations
+    const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+    tl.fromTo(
+      heroContentRef.current?.querySelector('h1'), 
+      { y: 100, opacity: 0 }, 
+      { y: 0, opacity: 1, duration: 1 }
+    )
+    .fromTo(
+      heroContentRef.current?.querySelector('p'), 
+      { y: 50, opacity: 0 }, 
+      { y: 0, opacity: 1, duration: 0.8 }, 
+      "-=0.6"
+    )
+    .fromTo(
+      heroContentRef.current?.querySelector('.buttons-container'), 
+      { y: 50, opacity: 0 }, 
+      { y: 0, opacity: 1, duration: 0.8 }, 
+      "-=0.6"
+    )
+    .fromTo(
+      statsRef.current, 
+      { y: 50, opacity: 0 }, 
+      { y: 0, opacity: 1, duration: 0.8, stagger: 0.2 }, 
+      "-=0.4"
+    )
+    .fromTo(
+      scrollIndicatorRef.current, 
+      { opacity: 0 }, 
+      { opacity: 1, duration: 0.5 }, 
+      "-=0.2"
+    );
+    
+    // Parallax effect enhancement with ScrollTrigger
+    gsap.to(heroRef.current, {
+      scrollTrigger: {
+        trigger: heroRef.current,
+        start: "top top",
+        end: "bottom top",
+        scrub: true
+      },
+      y: (i, target) => -ScrollTrigger.maxScroll(window) * 0.15,
+    });
+    
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
     <section 
       id="home" 
+      ref={heroRef}
       className="relative h-screen overflow-hidden flex items-center justify-center"
     >
       {/* Background Image with Parallax Effect */}
@@ -32,15 +86,15 @@ const Hero = () => {
       </div>
       
       {/* Content */}
-      <div className="container relative z-10 px-4 text-center">
-        <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white text-shadow mb-6 animate-fade-in-up">
+      <div ref={heroContentRef} className="container relative z-10 px-4 text-center">
+        <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white text-shadow mb-6">
           <span className="text-eco-light">Live Green</span>, Stay Connected
         </h1>
-        <p className="text-xl md:text-2xl text-white text-shadow mb-8 max-w-3xl mx-auto animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+        <p className="text-xl md:text-2xl text-white text-shadow mb-8 max-w-3xl mx-auto">
           Premium Plots Near Jewar Airport, designed for modern sustainable living
         </p>
         
-        <div className="flex flex-col md:flex-row justify-center items-center gap-4 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+        <div className="buttons-container flex flex-col md:flex-row justify-center items-center gap-4">
           <Button className="bg-eco hover:bg-eco-dark text-white px-8 py-6 text-lg">
             Book Your Plot Today!
           </Button>
@@ -49,7 +103,7 @@ const Hero = () => {
           </Button>
         </div>
 
-        <div className="mt-12 flex flex-wrap justify-center gap-6 animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
+        <div ref={statsRef} className="mt-12 flex flex-wrap justify-center gap-6">
           <div className="bg-white bg-opacity-20 backdrop-blur-sm rounded-lg px-6 py-3 text-white">
             <p className="font-bold">500m</p>
             <p>from Yamuna Expressway</p>
@@ -66,7 +120,7 @@ const Hero = () => {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+      <div ref={scrollIndicatorRef} className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
         <div className="w-6 h-10 rounded-full border-2 border-white flex justify-center">
           <div className="w-1 h-3 bg-white rounded-full mt-2"></div>
         </div>
