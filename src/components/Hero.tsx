@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useContactPopup } from "@/contexts/ContactPopupContext";
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -14,6 +15,7 @@ const Hero = () => {
   const heroContentRef = useRef(null);
   const statsRef = useRef(null);
   const scrollIndicatorRef = useRef(null);
+  const { openContactPopup } = useContactPopup();
   
   useEffect(() => {
     const handleScroll = () => {
@@ -67,6 +69,14 @@ const Hero = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleBookPlotClick = () => {
+    openContactPopup('Book Your Plot Today');
+  };
+
+  const handleMoreInfoClick = () => {
+    openContactPopup('Get More Information');
+  };
+
   return (
     <section 
       id="home" 
@@ -95,10 +105,17 @@ const Hero = () => {
         </p>
         
         <div className="buttons-container flex flex-col md:flex-row justify-center items-center gap-4">
-          <Button className="bg-eco hover:bg-eco-dark text-white px-8 py-6 text-lg">
+          <Button 
+            className="bg-eco hover:bg-eco-dark text-white px-8 py-6 text-lg"
+            onClick={handleBookPlotClick}
+          >
             Book Your Plot Today!
           </Button>
-          <Button variant="outline" className="bg-transparent border-white text-white hover:bg-white hover:text-eco-dark px-8 py-6 text-lg">
+          <Button 
+            variant="outline" 
+            className="bg-transparent border-white text-white hover:bg-white hover:text-eco-dark px-8 py-6 text-lg"
+            onClick={handleMoreInfoClick}
+          >
             Get More Info <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
         </div>

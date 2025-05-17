@@ -14,6 +14,7 @@ import Faqs from "@/components/Faqs";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 import AnimatedSection from "@/components/AnimatedSection";
+import { ContactPopupProvider } from "@/contexts/ContactPopupContext";
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollToPlugin);
@@ -61,33 +62,35 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen">
-      <Toaster />
-      <Header />
-      <main>
-        <Hero />
-        <AboutUs />
-        <AnimatedSection>
-          <ProjectDetails />
-        </AnimatedSection>
-        <AnimatedSection fromY={0} fromX={-50}>
-          <LocationMap />
-        </AnimatedSection>
-        <AnimatedSection>
-          <Gallery />
-        </AnimatedSection>
-        <AnimatedSection fromY={0} fromX={50}>
-          <Testimonials />
-        </AnimatedSection>
-        <AnimatedSection>
-          <Faqs />
-        </AnimatedSection>
-        <AnimatedSection>
-          <ContactForm />
-        </AnimatedSection>
-      </main>
-      <Footer />
-    </div>
+    <ContactPopupProvider>
+      <div className="min-h-screen">
+        <Toaster />
+        <Header />
+        <main>
+          <Hero />
+          <AboutUs />
+          <AnimatedSection>
+            <ProjectDetails />
+          </AnimatedSection>
+          <AnimatedSection fromY={0} fromX={-50}>
+            <LocationMap />
+          </AnimatedSection>
+          <AnimatedSection>
+            <Gallery />
+          </AnimatedSection>
+          <AnimatedSection fromY={0} fromX={50}>
+            <Testimonials />
+          </AnimatedSection>
+          <AnimatedSection>
+            <Faqs />
+          </AnimatedSection>
+          <AnimatedSection>
+            <ContactForm />
+          </AnimatedSection>
+        </main>
+        <Footer />
+      </div>
+    </ContactPopupProvider>
   );
 };
 

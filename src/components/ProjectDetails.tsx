@@ -1,8 +1,11 @@
 
 import React from 'react';
 import { Check } from "lucide-react";
+import { useContactPopup } from "@/contexts/ContactPopupContext";
 
 const ProjectDetails = () => {
+  const { openContactPopup } = useContactPopup();
+  
   const features = [
     { title: "500m from Yamuna Expressway", description: "Quick access to Delhi-NCR's major highway" },
     { title: "5km from Noida International Airport", description: "Future-ready location near international connectivity" },
@@ -17,6 +20,10 @@ const ProjectDetails = () => {
     { size: "200 sq. yards", price: "₹28 Lakhs onwards", features: ["Prime location", "Double corner options"] },
     { size: "300 sq. yards", price: "₹40 Lakhs onwards", features: ["Premium plots", "Best investment option"] }
   ];
+
+  const handleRequestDetails = (size: string) => {
+    openContactPopup(`Request Details for ${size} Plot`);
+  };
 
   return (
     <section id="project-details" className="section-padding">
@@ -103,7 +110,10 @@ const ProjectDetails = () => {
                       </li>
                     </ul>
                     <div className="mt-6 pt-6 border-t border-gray-100">
-                      <button className="w-full bg-eco text-white py-3 rounded-md hover:bg-eco-dark transition-colors">
+                      <button 
+                        className="w-full bg-eco text-white py-3 rounded-md hover:bg-eco-dark transition-colors"
+                        onClick={() => handleRequestDetails(plot.size)}
+                      >
                         Request Details
                       </button>
                     </div>

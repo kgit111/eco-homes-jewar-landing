@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useContactPopup } from "@/contexts/ContactPopupContext";
 
 const menuItems = [
   { label: 'Home', href: '#home' },
@@ -16,6 +17,7 @@ const menuItems = [
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { openContactPopup } = useContactPopup();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,6 +31,11 @@ const Header = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleBookPlotClick = () => {
+    openContactPopup('Book Your Plot Today');
+    setMobileMenuOpen(false);
+  };
 
   return (
     <header 
@@ -67,6 +74,7 @@ const Header = () => {
           ))}
           <Button 
             className="bg-eco hover:bg-eco-dark text-white ml-4"
+            onClick={handleBookPlotClick}
           >
             Book Your Plot Today!
           </Button>
@@ -114,6 +122,7 @@ const Header = () => {
             ))}
             <Button 
               className="bg-eco hover:bg-eco-dark text-white w-full mt-4"
+              onClick={handleBookPlotClick}
             >
               Book Your Plot Today!
             </Button>
