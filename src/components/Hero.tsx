@@ -10,20 +10,15 @@ import { useContactPopup } from "@/contexts/ContactPopupContext";
 gsap.registerPlugin(ScrollTrigger);
 
 const Hero = () => {
-  const [offset, setOffset] = useState(0);
   const heroRef = useRef(null);
   const heroContentRef = useRef(null);
   const statsRef = useRef(null);
   const scrollIndicatorRef = useRef(null);
+  const bgImageRef = useRef(null);
   const { openContactPopup } = useContactPopup();
   
   useEffect(() => {
-    const handleScroll = () => {
-      setOffset(window.pageYOffset * 0.5);
-    };
-    window.addEventListener('scroll', handleScroll);
-    
-    // GSAP animations
+    // GSAP animations for content
     const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
     tl.fromTo(
       heroContentRef.current?.querySelector('h1'), 
@@ -55,18 +50,24 @@ const Hero = () => {
       "-=0.2"
     );
     
-    // Parallax effect enhancement with ScrollTrigger
-    gsap.to(heroRef.current, {
-      scrollTrigger: {
-        trigger: heroRef.current,
-        start: "top top",
-        end: "bottom top",
-        scrub: true
-      },
-      y: (i, target) => -ScrollTrigger.maxScroll(window) * 0.15,
-    });
+    // Enhanced parallax effect with ScrollTrigger
+    if (bgImageRef.current) {
+      gsap.to(bgImageRef.current, {
+        yPercent: 30,
+        ease: "none",
+        scrollTrigger: {
+          trigger: heroRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: 0.6
+        }
+      });
+    }
     
-    return () => window.removeEventListener('scroll', handleScroll);
+    // Clean up ScrollTrigger instances to avoid memory leaks
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
   }, []);
 
   const handleBookPlotClick = () => {
@@ -85,10 +86,10 @@ const Hero = () => {
     >
       {/* Background Image with Parallax Effect */}
       <div 
-        className="absolute inset-0 bg-cover bg-center"
+        ref={bgImageRef}
+        className="absolute inset-0 bg-cover bg-center scale-110"
         style={{
           backgroundImage: 'url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2000")',
-          transform: `translateY(${offset}px)`,
         }}
       >
         {/* Overlay */}
