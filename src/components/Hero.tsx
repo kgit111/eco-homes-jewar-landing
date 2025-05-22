@@ -78,11 +78,10 @@ const Hero = () => {
     openContactPopup('Get More Information');
   };
 
-  return (
-    <section 
+  return (    <section 
       id="home" 
       ref={heroRef}
-      className="relative h-screen overflow-hidden flex items-center justify-center"
+      className="relative h-screen overflow-hidden flex items-center justify-center pt-12 md:pt-16"
     >
       {/* Background Image with Parallax Effect */}
       <div 
@@ -96,9 +95,8 @@ const Hero = () => {
         <div className="absolute inset-0 bg-black bg-opacity-40"></div>
       </div>
       
-      {/* Content */}
-      <div ref={heroContentRef} className="container relative z-10 px-4 text-center">
-        <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white text-shadow mb-6">
+      {/* Content */}      <div ref={heroContentRef} className="container relative z-10 px-4 text-center pt-8 md:pt-16">
+        <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white text-shadow mb-8 mt-4">
           <span className="text-eco-light">Live Green</span>, Stay Connected
         </h1>
         <p className="text-xl md:text-2xl text-white text-shadow mb-8 max-w-3xl mx-auto">

@@ -14,8 +14,7 @@ const menuItems = [
   { label: 'Contact', href: '#contact' },
 ];
 
-const Header = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
+const Header = () => {  const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { openContactPopup } = useContactPopup();
 
@@ -31,6 +30,22 @@ const Header = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+  
+  // Control body overflow when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+      document.body.style.width = '100%';
+    } else {
+      document.body.style.overflow = '';
+      document.body.style.width = '';
+    }
+    
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.width = '';
+    };
+  }, [mobileMenuOpen]);
 
   const handleBookPlotClick = () => {
     openContactPopup('Book Your Plot Today');
@@ -79,38 +94,33 @@ const Header = () => {
           >
             Book Your Plot Today!
           </Button>
-        </nav>
-
-        {/* Mobile menu button - Now properly positioned and always visible */}
-        <button 
-          className="lg:hidden p-2 z-20"
+        </nav>        {/* Mobile menu button - Now properly positioned and always visible */}        <button 
+          className="lg:hidden p-2 z-20 outline-none focus:outline-none"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle menu"
         >
           <div className={cn(
-            "w-6 h-0.5 mb-1.5 transition-all",
-            isScrolled ? "bg-gray-800" : "bg-white", 
+            "w-6 h-0.5 mb-1.5 transition-all duration-300 ease-in-out",
+            mobileMenuOpen ? "bg-black" : (isScrolled ? "bg-gray-800" : "bg-white"), 
             mobileMenuOpen && "transform rotate-45 translate-y-2"
           )}></div>
           <div className={cn(
-            "w-6 h-0.5 mb-1.5 transition-all",
-            isScrolled ? "bg-gray-800" : "bg-white",
+            "w-6 h-0.5 mb-1.5 transition-all duration-300 ease-in-out",
+            mobileMenuOpen ? "bg-black" : (isScrolled ? "bg-gray-800" : "bg-white"),
             mobileMenuOpen && "opacity-0"
           )}></div>
           <div className={cn(
-            "w-6 h-0.5 transition-all",
-            isScrolled ? "bg-gray-800" : "bg-white",
+            "w-6 h-0.5 transition-all duration-300 ease-in-out",
+            mobileMenuOpen ? "bg-black" : (isScrolled ? "bg-gray-800" : "bg-white"),
             mobileMenuOpen && "transform -rotate-45 -translate-y-2"
           )}></div>
         </button>
-      </div>
-
-      {/* Mobile Menu - Fixed positioning for better mobile experience */}
+      </div>      {/* Mobile Menu - Fixed positioning for better mobile experience */}
       <div className={cn(
-        "lg:hidden fixed inset-0 bg-white z-10 transition-all duration-300 pt-20",
+        "lg:hidden fixed inset-0 bg-white z-10 transition-all duration-300 ease-in-out pt-20 max-w-full w-full overflow-hidden",
         mobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
       )}>
-        <div className="container mx-auto px-4 h-full overflow-y-auto">
+        <div className="container mx-auto px-4 h-full overflow-y-auto overflow-x-hidden">
           <nav className="flex flex-col space-y-4 py-4">
             {menuItems.map((item) => (
               <a 
