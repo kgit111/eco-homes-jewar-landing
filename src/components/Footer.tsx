@@ -104,7 +104,7 @@ const Footer = () => {
             <ul className="space-y-3">
               <li className="text-gray-300">Monday - Friday: 9:00 AM - 6:00 PM</li>
               <li className="text-gray-300">Saturday: 10:00 AM - 4:00 PM</li>
-              <li className="text-gray-300">Sunday: By appointment only</li>
+              {/* <li className="text-gray-300">Sunday: By appointment only</li> */}
             </ul>
 
             <div className="mt-6">
