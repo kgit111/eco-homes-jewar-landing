@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://kgit111.github.io/eco-homes-jewar-landing/",
+  "homepage": "https://kgit111.github.io/eco-homes-jewar-landing/index.html",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
