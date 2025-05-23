@@ -10,52 +10,90 @@ interface AnimatedSectionProps {
   fromX?: number;
   fromY?: number;
   delay?: number;
+  duration?: number;
   className?: string;
-  triggerPosition?: string; // e.g. "top 80%"
+  triggerPosition?: string;
+  scale?: number;
+  stagger?: number;
+  reverseOnLeave?: boolean;
 }
 
 const AnimatedSection = ({ 
   children, 
   fromX = 0, 
   fromY = 50, 
-  delay = 0, 
+  delay = 0,
+  duration = 1.2,
   className = "", 
-  triggerPosition = "top 80%" 
+  triggerPosition = "top 80%",
+  scale = 0.95,
+  stagger = 0,
+  reverseOnLeave = true
 }: AnimatedSectionProps) => {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<ScrollTrigger | null>(null);
   
   useEffect(() => {
     const section = sectionRef.current;
     
     if (section) {
-      gsap.fromTo(
-        section,
-        { 
-          x: fromX, 
-          y: fromY, 
-          opacity: 0 
+      // Clean up existing trigger
+      if (triggerRef.current) {
+        triggerRef.current.kill();
+      }
+      
+      // Get all child elements for stagger animation
+      const children = gsap.utils.toArray(section.children) as Element[];
+      const elementsToAnimate = children.length > 0 && stagger > 0 ? children : [section];
+      
+      // Set initial state
+      gsap.set(elementsToAnimate, { 
+        x: fromX, 
+        y: fromY, 
+        opacity: 0,
+        scale: scale
+      });
+      
+      // Create ScrollTrigger with smooth animations
+      triggerRef.current = ScrollTrigger.create({
+        trigger: section,
+        start: triggerPosition,
+        end: "bottom 10%",
+        toggleActions: reverseOnLeave ? "play none none reverse" : "play none none none",
+        onEnter: () => {
+          gsap.to(elementsToAnimate, {
+            x: 0, 
+            y: 0, 
+            opacity: 1,
+            scale: 1,
+            duration: duration,
+            delay: delay,
+            stagger: stagger,
+            ease: "power3.out",
+            transformOrigin: "center center"
+          });
         },
-        { 
-          x: 0, 
-          y: 0, 
-          opacity: 1, 
-          duration: 0.8,
-          delay: delay,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: section,
-            start: triggerPosition,
-            toggleActions: "play none none none"
-          }
-        }
-      );
+        onLeaveBack: reverseOnLeave ? () => {
+          gsap.to(elementsToAnimate, {
+            x: fromX,
+            y: fromY,
+            opacity: 0,
+            scale: scale,
+            duration: 0.8,
+            stagger: stagger * 0.5,
+            ease: "power2.inOut"
+          });
+        } : undefined
+      });
     }
     
     return () => {
-      // Cleanup ScrollTrigger to avoid memory leaks
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      if (triggerRef.current) {
+        triggerRef.current.kill();
+        triggerRef.current = null;
+      }
     };
-  }, [fromX, fromY, delay, triggerPosition]);
+  }, [fromX, fromY, delay, duration, triggerPosition, scale, stagger, reverseOnLeave]);
   
   return (
     <div ref={sectionRef} className={className}>

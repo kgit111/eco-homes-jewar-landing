@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
+import { Info } from "lucide-react";
 
 interface ContactPopupProps {
   isOpen: boolean;
@@ -36,7 +37,8 @@ const ContactPopup = ({ isOpen, onClose, title = "Get in Touch" }: ContactPopupP
       setLoading(false);
       toast({
         title: "Inquiry Submitted!",
-        description: "Thank you for your interest. Our team will contact you shortly.",
+        description: "Thank you for your interest. Our team will contact you shortly. Note: To save data to Google Sheets, connect Supabase integration.",
+        duration: 6000,
       });
       setFormData({ name: '', email: '', phone: '', message: '' });
       onClose();
@@ -53,7 +55,20 @@ const ContactPopup = ({ isOpen, onClose, title = "Get in Touch" }: ContactPopupP
           </DialogDescription>
         </DialogHeader>
         
-        <form onSubmit={handleSubmit} className="space-y-4 mt-4">
+        {/* Google Sheets Integration Notice */}
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4">
+          <div className="flex items-start gap-2">
+            <Info className="h-5 w-5 text-blue-600 mt-0.5 flex-shrink-0" />
+            <div className="text-sm">
+              <p className="font-medium text-blue-900">Google Sheets Integration Available</p>
+              <p className="text-blue-700 mt-1">
+                To automatically save form data to Google Sheets, connect your Supabase integration using the green button in the top right.
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label htmlFor="popup-name" className="block text-sm font-medium text-gray-700 mb-1">Your Name *</label>
             <Input
@@ -63,6 +78,7 @@ const ContactPopup = ({ isOpen, onClose, title = "Get in Touch" }: ContactPopupP
               onChange={handleChange}
               required
               placeholder="Enter your name"
+              className="transition-all duration-300 focus:scale-[1.02] focus:shadow-md"
             />
           </div>
           
@@ -76,6 +92,7 @@ const ContactPopup = ({ isOpen, onClose, title = "Get in Touch" }: ContactPopupP
               onChange={handleChange}
               required
               placeholder="Enter your email"
+              className="transition-all duration-300 focus:scale-[1.02] focus:shadow-md"
             />
           </div>
           
@@ -88,6 +105,7 @@ const ContactPopup = ({ isOpen, onClose, title = "Get in Touch" }: ContactPopupP
               onChange={handleChange}
               required
               placeholder="Enter your phone number"
+              className="transition-all duration-300 focus:scale-[1.02] focus:shadow-md"
             />
           </div>
           
@@ -100,16 +118,22 @@ const ContactPopup = ({ isOpen, onClose, title = "Get in Touch" }: ContactPopupP
               onChange={handleChange}
               placeholder="How can we help you?"
               rows={3}
+              className="transition-all duration-300 focus:scale-[1.02] focus:shadow-md"
             />
           </div>
           
           <div className="flex justify-end gap-3 pt-3">
-            <Button type="button" variant="outline" onClick={onClose}>
+            <Button 
+              type="button" 
+              variant="outline" 
+              onClick={onClose}
+              className="transition-all duration-200 hover:scale-105"
+            >
               Cancel
             </Button>
             <Button 
               type="submit" 
-              className="bg-eco hover:bg-eco-dark text-white"
+              className="bg-eco hover:bg-eco-dark text-white transition-all duration-200 hover:scale-105"
               disabled={loading}
             >
               {loading ? (
