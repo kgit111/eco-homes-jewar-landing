@@ -112,9 +112,7 @@ const Gallery = () => {
         <p className="text-center text-gray-600 max-w-3xl mx-auto mb-12">
           Experience the beauty and potential of Yamuna Eco Homes through our gallery. 
           These images capture the natural beauty and planned development of our premium plots.
-        </p>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        </p>        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {galleryImages.map((image, index) => (
             <div 
               key={index}
@@ -125,7 +123,7 @@ const Gallery = () => {
               <img 
                 src={image.thumbnail} 
                 alt={image.alt}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-scale-down"
               />
               <div className="overlay-content absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 flex items-end p-6">
                 <p className="text-white">{image.alt}</p>
