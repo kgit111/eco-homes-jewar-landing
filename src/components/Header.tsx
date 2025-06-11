@@ -66,7 +66,7 @@ const Header = () => {  const [isScrolled, setIsScrolled] = useState(false);
         <div className="flex items-center z-20">
           <a href="#home" className="flex items-center">            <h1 className={cn(
               "font-playfair font-bold text-2xl md:text-3xl transition-all duration-300 flex items-center",
-              isScrolled ? "text-eco-dark" : "text-white text-shadow"
+              isScrolled ? "text-eco-dark" : "text-eco-dark "
             )}>
               <span className="text-eco">Yamuna</span>
               <img 
@@ -87,7 +87,7 @@ const Header = () => {  const [isScrolled, setIsScrolled] = useState(false);
               href={item.href}
               className={cn(
                 "font-medium text-sm transition-colors duration-300 hover:text-eco",
-                isScrolled ? "text-gray-800" : "text-white text-shadow"
+                isScrolled ? "text-gray-800" : "text-eco-light "
               )}
             >
               {item.label}
