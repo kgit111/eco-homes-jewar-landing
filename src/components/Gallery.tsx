@@ -7,7 +7,7 @@ const galleryImages = [
   {
     thumbnail: "/images/airport.jpg",
     fullsize: "/images/airport.jpg",
-    alt: "Upcoming Jewar Internaltion Airport"
+    alt: "Upcoming Jewar International Airport"
   },
   {
     thumbnail: "/images/bic.jpg",
