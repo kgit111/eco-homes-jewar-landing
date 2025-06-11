@@ -52,17 +52,32 @@ const ProjectDetails = () => {
           <div className="mb-20">
             <div className="relative rounded-xl overflow-hidden">
               <img 
-                src="https://images.unsplash.com/photo-1501854140801-50d01698950b?q=80&w=1600" 
+                src="/images/layout2.jpeg" 
                 alt="Yamuna Eco Homes Masterplan" 
                 className="w-full object-cover h-[500px]"
               />
               <div className="absolute inset-0 bg-gradient-to-r from-eco-dark/80 to-transparent flex items-center">
-                <div className="p-8 md:p-12 max-w-lg">
-                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">Thoughtfully Designed Masterplan</h3>
+                <div className="p-8 md:p-12 max-w-lg">                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">Thoughtfully Designed Masterplan</h3>
                   <p className="text-white text-lg mb-6">
                     Our meticulously planned development ensures that every plot benefits from excellent 
                     infrastructure, generous green spaces, and strategic positioning.
                   </p>
+                  <button 
+                    onClick={() => {
+                      const link = document.createElement('a');
+                      link.href = '/images/layout.jpeg';
+                      link.download = 'Yamuna-Eco-Homes-Layout.jpeg';
+                      document.body.appendChild(link);
+                      link.click();
+                      document.body.removeChild(link);
+                    }}
+                    className="bg-eco-light hover:bg-eco-light text-white py-2 px-4 rounded-md mb-6 flex items-center"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
+                    </svg>
+                    Download Layout Plan
+                  </button>
                   <ul className="space-y-2 text-white">
                     <li className="flex items-center">
                       <Check className="mr-2 h-5 w-5 text-eco-light" /> Wide roads throughout the project
