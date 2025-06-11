@@ -29,7 +29,7 @@ const Footer = () => {
               <span className="text-eco-light">Yamuna</span> Eco Homes
             </h3>
             <p className="mb-6 text-gray-300">
-              Premium plots near Jewar Airport offering sustainable living 
+              Premium plots near Noida International Airport, Jewar and Yamuna Expressway offering sustainable living 
               with excellent connectivity and investment potential.
             </p>
             <div className="flex space-x-4">

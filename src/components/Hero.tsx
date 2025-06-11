@@ -99,7 +99,7 @@ const Hero = () => {
           <span className="text-eco-light">Live Green</span>, Stay Connected
         </h1>
         <p className="text-xl md:text-2xl text-white text-shadow mb-8 max-w-3xl mx-auto">
-          Premium Plots Near Jewar Airport and Yamuna Expressway, designed for modern sustainable living
+          Premium Plots Near Noida International Airport, Jewar and Yamuna Expressway, designed for modern sustainable living
         </p>
         
         <div className="buttons-container flex flex-col md:flex-row justify-center items-center gap-4">

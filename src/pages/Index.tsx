@@ -23,12 +23,12 @@ gsap.registerPlugin(ScrollToPlugin, ScrollTrigger);
 const Index = () => {
   useEffect(() => {
     // Set the page title for SEO
-    document.title = "Yamuna Eco Homes | Premium Plots Near Jewar Airport";
+    document.title = "Yamuna Eco Homes | Premium Plots Near Noida International Airport, Jewar and Yamuna Expressway";
     
     // Add meta description for SEO
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) {
-      metaDesc.setAttribute("content", "Yamuna Eco Homes offers premium plots near Jewar Airport and Yamuna Expressway. Experience sustainable living with excellent connectivity and investment potential.");
+      metaDesc.setAttribute("content", "Yamuna Eco Homes offers premium plots near Noida International Airport, Jewar and Yamuna Expressway. Experience sustainable living with excellent connectivity and investment potential.");
     }
     
     // Initialize ScrollTrigger to refresh on page load
