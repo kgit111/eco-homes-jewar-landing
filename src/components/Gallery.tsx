@@ -5,34 +5,19 @@ import { gsap } from 'gsap';
 
 const galleryImages = [
   {
-    thumbnail: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=600",
-    fullsize: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200",
-    alt: "Scenic view of Yamuna Eco Homes landscape"
+    thumbnail: "/images/airport.jpg",
+    fullsize: "/images/airport.jpg",
+    alt: "Upcoming Jewar Internaltion Airport"
   },
   {
-    thumbnail: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?q=80&w=600",
-    fullsize: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?q=80&w=1200",
-    alt: "Lush greenery surrounding the plots"
+    thumbnail: "/images/bic.jpg",
+    fullsize: "/images/bic.jpg",
+    alt: "Buddh International Circuit"
   },
   {
-    thumbnail: "https://images.unsplash.com/photo-1518495973542-4542c06a5843?q=80&w=600",
-    fullsize: "https://images.unsplash.com/photo-1518495973542-4542c06a5843?q=80&w=1200",
-    alt: "Sunlight through trees at Yamuna Eco Homes"
-  },
-  {
-    thumbnail: "https://images.unsplash.com/photo-1501854140801-50d01698950b?q=80&w=600",
-    fullsize: "https://images.unsplash.com/photo-1501854140801-50d01698950b?q=80&w=1200",
-    alt: "Aerial view of the development area"
-  },
-  {
-    thumbnail: "https://images.unsplash.com/photo-1615729947596-a598e5de0ab3?q=80&w=600",
-    fullsize: "https://images.unsplash.com/photo-1615729947596-a598e5de0ab3?q=80&w=1200",
-    alt: "Natural terrain at the project site"
-  },
-  {
-    thumbnail: "https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?q=80&w=600",
-    fullsize: "https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?q=80&w=1200",
-    alt: "River view near Yamuna Eco Homes"
+    thumbnail: "/images/film_city.jpg",
+    fullsize: "/images/film_city.jpg",
+    alt: "Upcoming Film City"
   }
 ];
 

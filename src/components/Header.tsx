@@ -64,12 +64,17 @@ const Header = () => {  const [isScrolled, setIsScrolled] = useState(false);
       <div className="container mx-auto px-4 flex items-center justify-between">
         {/* Logo - Now always visible with proper styling */}
         <div className="flex items-center z-20">
-          <a href="#home" className="flex items-center">
-            <h1 className={cn(
-              "font-playfair font-bold text-2xl md:text-3xl transition-all duration-300",
+          <a href="#home" className="flex items-center">            <h1 className={cn(
+              "font-playfair font-bold text-2xl md:text-3xl transition-all duration-300 flex items-center",
               isScrolled ? "text-eco-dark" : "text-white text-shadow"
             )}>
-              <span className="text-eco">Yamuna</span> Eco Homes
+              <span className="text-eco">Yamuna</span>
+              <img 
+                src="/images/logo_transparent.png" 
+                alt="Eco Homes Logo"
+                className="h-6 md:h-8 mx-2 inline-block"
+              />
+              Eco Homes
             </h1>
           </a>
         </div>

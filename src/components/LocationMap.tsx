@@ -1,15 +1,8 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { MapPin } from 'lucide-react';
 
 const LocationMap = () => {
-  const [apiKey, setApiKey] = useState("");
-  const [showKeyInput, setShowKeyInput] = useState(true);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setShowKeyInput(false);
-  };
 
   const landmarks = [
     { name: "Yamuna Expressway", distance: "500m" },
@@ -57,43 +50,17 @@ const LocationMap = () => {
                 </div>
               </div>
 
-              {/* Map */}
-              <div className="md:col-span-3 h-[500px]">
-                {showKeyInput ? (
-                  <div className="h-full flex items-center justify-center bg-gray-100">
-                    <div className="text-center p-8 max-w-md">
-                      <h3 className="text-lg font-medium mb-4">Enter your Google Maps API key</h3>
-                      <p className="text-gray-500 mb-6">
-                        To view the interactive map, please enter your Google Maps API key. This is 
-                        a temporary step for the demo.
-                      </p>
-                      <form onSubmit={handleSubmit} className="space-y-4">
-                        <input
-                          type="text"
-                          value={apiKey}
-                          onChange={(e) => setApiKey(e.target.value)}
-                          placeholder="Enter API Key"
-                          className="w-full p-3 border border-gray-300 rounded-md"
-                        />
-                        <button
-                          type="submit"
-                          className="w-full py-3 bg-eco text-white rounded-md hover:bg-eco-dark transition-colors"
-                        >
-                          Load Map
-                        </button>
-                      </form>
-                    </div>
-                  </div>
-                ) : (
-                  <iframe
-                    title="Yamuna Eco Homes Location"
-                    width="100%"
-                    height="100%"
-                    frameBorder="0"
-                    src={`https://www.google.com/maps/embed/v1/place?key=${apiKey}&q=Jewar+Airport,Uttar+Pradesh,India&zoom=12`}
-                    allowFullScreen
-                  ></iframe>
-                )}
+              {/* Map */}              <div className="md:col-span-3 h-[500px]">
+                <iframe 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2891.072162249613!2d77.57964727447303!3d28.123060307035626!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cb5005c5956c7%3A0xe3e73339b6f300b6!2sYamuna%20Eco%20Homes!5e1!3m2!1sen!2sin!4v1749625844037!5m2!1sen!2sin" 
+                  width="100%" 
+                  height="100%" 
+                  style={{border: 0}} 
+                  allowFullScreen 
+                  loading="lazy" 
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Yamuna Eco Homes Location"
+                ></iframe>
               </div>
             </div>
           </div>
