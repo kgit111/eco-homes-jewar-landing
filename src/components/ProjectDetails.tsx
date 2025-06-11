@@ -16,9 +16,9 @@ const ProjectDetails = () => {
   ];
 
   const plotOptions = [
-    { size: "100 sq. yards", price: "₹15 Lakhs onwards", features: ["Corner plot", "Park facing available"] },
-    { size: "200 sq. yards", price: "₹28 Lakhs onwards", features: ["Prime location", "Double corner options"] },
-    { size: "300 sq. yards", price: "₹40 Lakhs onwards", features: ["Premium plots", "Best investment option"] }
+    { size: "70 sq. yards", price: "17 Lakhs onwards", features: ["Corner plot", "Park facing available"] },
+    { size: "100 sq. yards", price: "25 Lakhs onwards", features: ["Prime location", "Double corner options"] },
+    { size: "120 sq. yards", price: "30 Lakhs onwards", features: ["Premium plots", "Best investment option"] }
   ];
 
   const handleRequestDetails = (size: string) => {

@@ -83,12 +83,11 @@ const Hero = () => {
       ref={heroRef}
       className="relative h-screen overflow-hidden flex items-center justify-center pt-12 md:pt-16"
     >
-      {/* Background Image with Parallax Effect */}
-      <div 
+      {/* Background Image with Parallax Effect */}      <div 
         ref={bgImageRef}
         className="absolute inset-0 bg-cover bg-center scale-110"
         style={{
-          backgroundImage: 'url("https://images.unsplash.com/photo-1469041797191-50ace28483c3?q=80&w=2000")',
+          backgroundImage: 'url("/images/hero.png")',
         }}
       >
         {/* Overlay */}

@@ -149,7 +149,7 @@ const Gallery = () => {
           ))}
         </div>
 
-        <div ref={videoSectionRef} className="mt-12 text-center">
+        {/* <div ref={videoSectionRef} className="mt-12 text-center">
           <div className="relative aspect-video max-w-4xl mx-auto rounded-xl overflow-hidden shadow-xl">
             <img 
               src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600" 
@@ -164,7 +164,7 @@ const Gallery = () => {
             <div className="absolute inset-0 bg-black/20"></div>
           </div>
           <p className="mt-4 text-gray-600">Click to watch our project video walkthrough</p>
-        </div>
+        </div> */}
       </div>
 
       <Dialog open={!!selectedImage} onOpenChange={() => setSelectedImage(null)}>
