@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
+import googleSheetsApi from "@/lib/googleSheets";
 
 const ContactForm = () => {
   const { toast } = useToast();
@@ -18,21 +19,32 @@ const ContactForm = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
+  };  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('Submit Inquiry button clicked with data:', formData);
     setLoading(true);
     
-    // Simulate form submission
-    setTimeout(() => {
-      setLoading(false);
+    try {
+      await googleSheetsApi.pushToGoogleSheets({
+        ...formData,
+        source: 'Main Contact Form',
+        timestamp: new Date().toISOString()
+      });
       toast({
         title: "Inquiry Submitted!",
         description: "Thank you for your interest. Our team will contact you shortly.",
       });
       setFormData({ name: '', email: '', phone: '', message: '' });
-    }, 1500);
+    } catch (error) {
+      console.error('Form submission error:', error);
+      toast({
+        title: "Submission Failed",
+        description: "There was an error submitting your inquiry. Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   const contactInfo = [

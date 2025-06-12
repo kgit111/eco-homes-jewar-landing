@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
+import googleSheetsApi from "@/lib/googleSheets";
 
 interface ContactPopupProps {
   isOpen: boolean;
@@ -25,22 +26,33 @@ const ContactPopup = ({ isOpen, onClose, title = "Get in Touch" }: ContactPopupP
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
+  };  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    console.log('Submit Inquiry button clicked with data:', formData);
     
-    // Simulate form submission
-    setTimeout(() => {
-      setLoading(false);
+    try {
+      await googleSheetsApi.pushToGoogleSheets({
+        ...formData,
+        source: 'Popup Form',
+        timestamp: new Date().toISOString()
+      });
       toast({
         title: "Inquiry Submitted!",
         description: "Thank you for your interest. Our team will contact you shortly.",
       });
       setFormData({ name: '', email: '', phone: '', message: '' });
       onClose();
-    }, 1500);
+    } catch (error) {
+      console.error('Form submission error:', error);
+      toast({
+        title: "Submission Failed",
+        description: "There was an error submitting your inquiry. Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
